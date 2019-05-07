@@ -3,7 +3,7 @@
     "description": "Download youtube videos easily",
     "version": "0.1",
     "manifest_version": 2,
-    "web_accessible_resources": ["src/background.js"],
+    "web_accessible_resources": ["src/youtubedl.js"],
     "content_scripts": [
         {
             "matches": ["https://www.youtube.com/watch*"],
@@ -13,5 +13,8 @@
     ],
     "permissions": [
         "downloads"
-    ]
+    ],
+    "background": {
+        "scripts": ["src/background.js"]
+    }
 }
