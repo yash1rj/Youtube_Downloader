@@ -18,8 +18,18 @@ function downloadURI(event) {
     var name = document.getElementsByTagName("title")[0].innerText;
     var datatype = event.currentTarget.getAttribute("data-type");
     var data = {url: url, name: name, sender: "YTDL", type: datatype};
+
     window.postMessage(data, "*");
 
+    var dl = document.getElementById("videoDownloadDropDown");
+    
+    if(dl.className.indexOf("shown") > -1) {
+        dl.className = dl.className.replace("shown", "");
+    }
+    else {
+        dl.className += "shown";
+    }
+    
     return false;
 }
 
@@ -53,7 +63,9 @@ window.onload = function() {
 
     for(i in videoURLs) {
         var item = document.createElement("a");
-        item.innerText = videoURLs[i]["quality"];
+        var ext = videoURLs[i]["type"].split("/")[1].split(";")[0];
+
+        item.innerText = videoURLs[i]["quality"] + " ( " + ext +" )";
         item.setAttribute("href", videoURLs[i]["url"]);
         item.setAttribute("target", "_blank");
         item.setAttribute("data-type", videoURLs[i]["type"]);
